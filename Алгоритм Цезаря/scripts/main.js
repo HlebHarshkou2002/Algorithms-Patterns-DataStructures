@@ -2,6 +2,7 @@ function encrypt(str, key) {
   str = str.replace(/\s/g, "");
 
   var eng = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  // Смещение
   let shift = key;
   let msg = str;
   console.log(msg);
@@ -12,9 +13,11 @@ function encrypt(str, key) {
     for (let i of msg) {
       let place = eng.indexOf(i);
       console.log(i, "place=", place);
+      // Прибавляем к старому значению положения наше смещение
       let new_place = place + shift;
       console.log("New place", new_place);
       if (eng.includes(i)) {
+        // зацикливаем наш алфавит чтобы не выйти за пределы
         if(new_place < 0) {
           new_place = eng.length + new_place;
         } else if(new_place > eng.length) {
@@ -81,4 +84,5 @@ function testDecrypt(text, key) {
   document.body.appendChild(pre);
 }
 
-testEncrypt("y", 3);
+testEncrypt("cryptographyanddatasecurity", 3);
+testDecrypt("fubswrjudskbdqggdwdvhfxulwb", 3);

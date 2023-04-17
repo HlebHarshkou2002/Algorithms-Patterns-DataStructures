@@ -85,10 +85,6 @@ function encrypt(str, key) {
   // console.log(result.length)
   // console.log(str.length)
 
-  console.log(keySchema);
-  console.log(result);
-  console.log(result.length);
-
   return result;
 }
 
@@ -163,8 +159,6 @@ function decrypt(str, key) {
     // console.log(startPosition)
   }
 
-
-
   // По порядку достаём символы из фрагментов
 
   let result = [];
@@ -186,8 +180,10 @@ function decrypt(str, key) {
 
   console.log("keySchema", keySchema);
   console.log("keySchemaDuplicate", keySchemaDuplicate);
-  console.log(result);
-  console.log(result.length);
+
+  result = clearSymbols(result);
+
+  // console.log(result)
 
   return result;
 }
@@ -195,8 +191,9 @@ function decrypt(str, key) {
 // Конец алгоритма дешифрования
 
 function testEncrypt(text, key) {
+  let resultText = checkStrLength(text, key);
   var pre = document.createElement("pre");
-  pre.innerHTML = encrypt(text, key);
+  pre.innerHTML = encrypt(resultText, key);
   document.body.appendChild(pre);
 }
 
@@ -206,5 +203,40 @@ function testDecrypt(text, key) {
   document.body.appendChild(pre);
 }
 
-// testEncrypt("Я_ЛЮБЛЮ_ТЕБЯ____", "ВЕРОНИКА"); 
-testDecrypt("_Я_ЛЮБЮЛ_ТЕ___ЯБ", "ВЕРОНИКА"); 
+function checkStrLength(text, key) {
+  let resultText = text;
+  let part = 0;
+
+  if (text.length % key.length !== 0) {
+    if (text.length < key.length) {
+      part = key.length - text.length;
+      for (let i = 0; i < part; i++) {
+        resultText += "#";
+        console.log(resultText);
+      }
+    } else {
+      // part = (key.length - Math.abs(text.length - key.length));
+      part = (key.length - (text.length % key.length));
+      debugger;
+
+      for (let i = 0; i < part; i++) {
+        resultText += "#";
+      }
+    }
+  }
+
+  return resultText;
+}
+
+function clearSymbols(text) {
+  let resultText = "";
+  for (let i = 0; i < text.length; i++) {
+    if (text[i] !== "#") {
+      resultText += text[i];
+    }
+  }
+  return resultText;
+}
+
+testEncrypt("КРИПТОГРАФ", "МАМА");
+testDecrypt("РПКИОРТГФ#А#", "МАМА");

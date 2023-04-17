@@ -8,6 +8,7 @@ function encrypt(str, k) {
     }
   }
 
+
   let isBack = true;
   let row = 0;
 
@@ -15,6 +16,7 @@ function encrypt(str, k) {
     if (row == k - 1 || row == 0) {
       isBack = !isBack;
     }
+    // Добавление в таблицу символа
     map[row][j] = str[j];
     if (isBack) {
       row--;
@@ -33,6 +35,7 @@ function encrypt(str, k) {
     }
   }
 
+
   return result.join("");
 }
 
@@ -45,6 +48,7 @@ function decrypt(str, k) {
       map[i][j] = ".";
     }
   }
+
 
   let isBack = true;
   let row = 0;
@@ -61,7 +65,7 @@ function decrypt(str, k) {
     }
   }
 
-
+  // Переменная указывает на индекс элемента зашифрованной строки, которым нужно заполнить таблицу
   let counter = 0;
 
   for (let i = 0; i < k; i++) {
@@ -105,4 +109,4 @@ function testDecrypt(text, rows) {
   document.body.appendChild(pre);
 }
 
-testDecrypt("CTARPORPYYGH", 3); // CTARPORPYYGH
+testEncrypt("CRYPTOGRAPHY", 3); // CTARPORPYYGH
