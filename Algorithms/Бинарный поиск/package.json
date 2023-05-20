@@ -1,0 +1,12 @@
+{
+  "name": "binary-search",
+  "version": "1.0.0",
+  "description": "this is an algorithm of binary search",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx tsc main.ts && node main.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
